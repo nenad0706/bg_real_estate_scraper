@@ -1,0 +1,52 @@
+<html>
+	<head>
+		<title>BG Real Estate</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<div class="header">
+			<a href="/"><h1>BELGRADE REAL ESTATE</h1></a>
+			<a href="scrape" class="scrape">Scrape</a>
+		</div>
+
+		<div class="navbar">
+			<a href="index">Home</a>
+			<a href="scrape">| Scrape</a>
+		</div>
+
+		<div class="container">
+			{% if log.success %}
+				<h2> {{ log.message }} </h2>
+			{% else %}
+				<h2 style="color: #e52427;"> {{ log.message }} </h2>
+				Last time scraped successfully: {{ log.last_time_scraped }}
+				<br/>
+				<br/>
+			{% endif %}
+			
+			{% if not log.too_fast %}
+			<table>
+				<tr>
+					<td>Records in database</td>
+					<td>{{ log.found_in_db }}</td>
+				</tr>
+				<tr>
+					<td>New records fetched</td>
+					<td>{{ log.fetched_new }}</td>
+				</tr>
+				<tr>
+					<td>Total records</td>
+					<td><b>{{ log.fetched_new + log.found_in_db }}</b></td>
+				</tr>	
+			</table>
+			{% endif %}
+
+		</div>
+		
+		<div class="footer">
+			<p>&#9400; 2019 Popovic Nenad </p>
+		</div>
+		
+	</body>
+</html>

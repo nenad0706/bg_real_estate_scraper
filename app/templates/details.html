@@ -1,0 +1,89 @@
+<html>
+	<head>
+		<title>BG Real Estate</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<div class="header">
+			<a href="/"><h1>BELGRADE REAL ESTATE</h1></a>
+			<a href="scrape" class="scrape">Scrape</a>
+		</div>
+
+		<div class="navbar">
+			<a href="index">Home</a>
+			<a href="details?m={{ mn }}"> | {{ mn }}</a>
+		</div>
+
+
+		<div class="container">
+			<h2> {{ mn }} </h2>
+			<table>
+				<tr>
+					<td>Number of real estates</td>
+					<td>{{ md.count }}</td>
+				</tr>
+				<tr>
+					<td>Average size</td>
+					<td>{{ md.avg_size }} m&sup2;</td>
+				</tr>
+				<tr>
+					<td>Average price per 1m&sup2;</td>
+					<td>{{ md.avg_price }} &euro;</td>
+				</tr>	
+			</table>
+
+			<div class="pagination upper">
+				<a class="{{ pag.first.css_class }}" href="{{ pag.first.url }}">{{ pag.first.label }}</a>
+				<a class="pag-s {{ pag.prev.css_class }}" href="{{ pag.prev.url }}">&#10092;</a>
+				<p> {{ pag.current }} </p>
+				<a class="pag-s {{ pag.next.css_class }}" href="{{ pag.next.url }}">&#10093;</a>
+				<a class="{{ pag.last.css_class }}" href="{{ pag.last.url }}">{{ pag.last.label }}</a>
+			</div>
+			<div class="just-border"></div>
+			<table class="data">
+				
+				
+				<tr> 
+					<th>Street</th> 
+					<th>Floor </th> 
+					<th>Structure</th>
+					<th>Furnished</th>
+					<th>Size (m&sup2;)</th> 
+					<th>Price (&euro;)</th> 
+					<th>Price (&euro;/m&sup2;)</th> 
+					<th>Filed</th>
+					<th>Link</th>
+				</tr>
+				{% for apt in apts %}
+					<tr>
+						<td> {{ apt.id}} </td>
+						<td> {{ apt.floor}} </td>
+						<td> {{ apt.structure }} </td>
+						<td> {{ apt.furnished }} </td>
+						<td> {{ apt.size}} </td>
+						<td> {{ apt.price}} </td>
+						<td> {{ apt.pricePerSize}} </td>
+						<td> {{ apt.filed }} </td>
+						<td> <a target="_blank" href="{{ apt.url }}">cityexpert.rs</a>
+					</tr>
+				{% endfor %}
+
+
+			</table>
+			<div class="just-border"></div>
+			<div class="pagination bottom">
+				<a class="{{ pag.first.css_class }}" href="{{ pag.first.url }}">{{ pag.first.label }}</a>
+				<a class="pag-s {{ pag.prev.css_class }}" href="{{ pag.prev.url }}">&#10092;</a>
+				<p> {{ pag.current }} </p>
+				<a class="pag-s {{ pag.next.css_class }}" href="{{ pag.next.url }}">&#10093;</a>
+				<a class="{{ pag.last.css_class }}" href="{{ pag.last.url }}">{{ pag.last.label }}</a>
+			</div>
+		</div>
+		
+		<div class="footer">
+			<p>&#9400; 2019 Popovic Nenad </p>
+		</div>
+		
+	</body>
+</html>
